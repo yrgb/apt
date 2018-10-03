@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title >Some string operators</title>
+</head>
+
+<body bgcolor="#a8fff1">
+<img src="https://seeklogo.com/images/F/fatih-sultan-mehmet-vakif-universitesi-logo-85D48DC890-seeklogo.com.png" alt="fsmlogo"  >
+<style>
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+     width: 13%;
+}
+</style>
+
+<h2 id=title></h2>
+ <b style="color:#0502d8";>Enter word or sentence:</b>
+ 
+<p>
+
+<textarea id=inp rows=5 cols=40
+onKeyUp="len.value=inp.textLength"
+>
+</textarea>
+</p>
+
+<b>length:</b>	
+<input id=len type=text>
+<br><br>
+
+
+<button onclick="rev()">Reverse</button>
+<b style="color:#FF0000"; id="inv"></b>
+
+<br><br>
+
+
+<button onclick="searchAndPlace()">Search Word</button>
+<input id=ser type=text>
+
+<b style="color:#FF0000"; id="demo"></b>
+
+<br><br>
+
+
+<button onclick="print()">Print and Change Colour</button>
+<br>
+<button onclick="purple()">purple</button> <button onclick="brown()">brown</button> <button onclick="green()">green</button>
+
+
+<p style="color:#FF0000;font-size:200%"; id ="prg" > </p>
+
+
+<script>
+    title.innerText = document.title;
+    
+
+function rev()
+ {
+	 var str =  document.getElementById("inp").value.split("").reverse().join("")
+
+	 document.getElementById("inv").innerHTML = str
+ }
+
+	 
+function searchAndPlace()
+ {
+    var str =  document.getElementById("inp").value
+    var n = str.search(document.getElementById("ser").value);
+	var last = str.lastIndexOf(document.getElementById("ser").value);
+
+    if(document.getElementById("ser").value.length==0){
+	     document.getElementById("demo").innerHTML = 'You havent write anything yet'
+
+    }
+    else if (n!=-1){
+	   document.getElementById("demo").innerHTML = 'First place is: ' + n + ' Last place is:' + last
+	
+    }
+    
+    else{
+	    document.getElementById("demo").innerHTML = 'Not found'
+    }
+    
+}
+
+function print()
+{
+var str =  document.getElementById("inp").value	
+ document.getElementById("prg").innerHTML = str
+}
+
+
+function purple()
+ {
+	 
+	 document.getElementById("prg").style.color = "#2431c1";
+
+ }
+ 
+function brown()
+ {
+	 document.getElementById("prg").style.color = "#7c490e";
+
+ }
+
+function green()
+ {
+	 document.getElementById("prg").style.color = "#114220";
+
+ }
+ 
+</script>
+
+</body>
+</html>
