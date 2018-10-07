@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>HW1</title>
+</head>
+
+<body>
+
+<h1 id="title">Add course:</h1>
+
+
+<p>
+	
+<label>Name:</label>		<input id=inputName     type=text>		<br>
+
+<label>Midterm:</label>		<input id=inputMidterm  type="number">	<br>
+
+<label>Final:</label>		<input id=inputFinal    type="number">	<br>
+
+</p>
+
+<style>
+label{
+    display: inline-block;
+    float: left;
+    clear: left;
+    width: 60px;
+    text-align: left;
+}
+input {
+  display: inline-block;
+  float: left;
+}
+</style>
+
+<br>
+
+
+<button onclick="addCourse()">Add</button>
+
+<br>
+
+<button onclick="printCourse()">Print</button>
+<button onclick="avg()">Avg</button>
+<button onclick="maxx()">Max</button>
+
+<hr>
+
+<p><b>Name Midterm Final</b></p>
+
+<p id="pgCo"></p><hr>
+
+<p><b>Name Average</b></p>
+
+<p id="pgAv"></p><hr>
+
+<p><b>Name Max</b></p>
+
+<p id="pgMax"></p><hr> 
+ 
+<script>
+	
+	var courseArray=[]
+	var index=0
+	var max=0
+	
+function addCourse()
+{
+     courseArray[index++] = [inputName.value,Number(inputMidterm.value),Number(inputFinal.value)];
+     inputName.value="";
+     inputMidterm.value="";
+     inputFinal.value="";
+    
+}
+
+function printCourse()
+{
+	
+	pgCo.innerText = ""
+	for (var i = 0; i < courseArray.length; i++)
+	 {
+		pgCo.innerText += courseArray[i].join(" ")+"\n"
+	 }
+	 
+}
+
+function avg()
+{
+	pgAv.innerText = "" 
+	
+	var ort=0
+	
+	for (var i = 0; i < courseArray.length; i++)
+	 {
+		ort=(courseArray[i][1]+courseArray[i][2])/2
+		if(ort>max)
+		{
+			max=ort
+		}
+		pgAv.innerText += courseArray[i][0]+" "+ort+"\n"
+	 }
+	 
+	 
+}
+
+function maxx()
+{
+	pgMax.innerText = max
+}
+
+</script>
+
+</body>
+</html>
