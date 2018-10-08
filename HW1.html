@@ -10,12 +10,15 @@
 
 <h1 id="title">Add course:</h1>
 
-<p>	
+
+<p>
+	
 <label>Name:</label>		<input onkeyup="enableAndDisable()" id=inputName     type=text>		<br>
 
 <label>Midterm:</label>		<input onkeyup="enableAndDisable()" id=inputMidterm  type=number>	<br>
 
-<label>Final:</label>		<input onkeyup="enableAndDisable()" id=inputFinal    type=number>	<br>
+<label>Final:</label>		<input onkeyup="enableAndDisable()" id=inputFinal    type=number>
+
 </p>
 
 <style>
@@ -39,21 +42,26 @@ input
 
 </style>
 
+<br>
+
+
 <button id=btnAdd   onclick="addCourse()" 	 disabled="true"> Add</button> <br>
 
 <button id=btnPrint onclick="printCourse()"> Print</button>
 <button id=btnAvg   onclick="avg()"> 		 Avg  </button>
 <button id=btnMax   onclick="avgMax()"> 	 Max  </button>
  
-<hr><p><b>Name Midterm Final</b></p>			<p id="pgCo"></p><hr>
-<p><b>Name Average</b></p>				<p id="pgAv"></p><hr>
-<p><b>Name Max</b></p>					<p id="pgMax"></p><hr>
+<hr><p><b>Name &emsp; Midterm &emsp; Final</b></p>	<p id="pgCo"></p><hr>
+<p><b>Name &emsp; Average</b></p>				<p id="pgAv"></p><hr>
+<p><b>Name &emsp; Max</b></p>					<p id="pgMax"></p><hr>
+
  
 <script>
 	
 	var courseArray=[]
 	var index=0
 	var max=0
+	var maxName=""
 	
 function enableAndDisable()
 {
@@ -71,7 +79,7 @@ function enableAndDisable()
 }
 function addCourse()
 {
-	     document.getElementById("btnAdd").disabled   = true;
+		 document.getElementById("btnAdd").disabled   = true;
 	     courseArray[index++] = [inputName.value,Number(inputMidterm.value),Number(inputFinal.value)];
 	     inputName.value="";
 	     inputMidterm.value="";
@@ -80,16 +88,18 @@ function addCourse()
 }
 function printCourse()
 {
-	pgCo.innerText = ""
+	pgCo.innerHTML = ""
 	for (var i = 0; i < courseArray.length; i++)
-	 { 
-		pgCo.innerText += courseArray[i].join(" ")+"\n"
+	 {
+		 
+		pgCo.innerHTML += courseArray[i][0]+  "&emsp; &emsp; &emsp;" + courseArray[i][1]+ "&emsp;&emsp; &emsp;" +courseArray[i][2]+ "<br>"
 	 }
+	 
 	 
 }
 function avg()
 {
-	pgAv.innerText = "" 
+	pgAv.innerHTML= "" 
 	
 	var ort=0
 	
@@ -99,8 +109,9 @@ function avg()
 		if(ort>max)
 		{
 			max=ort
+			maxName=courseArray[i][0]
 		}
-		pgAv.innerText += courseArray[i][0]+" "+ort+"\n"
+		pgAv.innerHTML+= courseArray[i][0]+ "&emsp; &emsp; &emsp;"+ort+ "<br>"
 	 }
 	 
 	 
@@ -109,11 +120,12 @@ function avgMax()
 {	
 	if(index!=0)
 	 {
-	   pgMax.innerText = max
+	   pgMax.innerHTML = maxName + "&emsp; &emsp; &emsp;"+ max + "<br>"
 	 }
 	
 }
-	
+
+
 </script>
 
 </body>
