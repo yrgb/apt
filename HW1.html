@@ -10,15 +10,12 @@
 
 <h1 id="title">Add course:</h1>
 
-
 <p>
-	
 <label>Name:</label>		<input onkeyup="enableAndDisable()" id=inputName     type=text>		<br>
 
 <label>Midterm:</label>		<input onkeyup="enableAndDisable()" id=inputMidterm  type=number>	<br>
 
-<label>Final:</label>		<input onkeyup="enableAndDisable()" id=inputFinal    type=number>
-
+<label>Final:</label>		<input onkeyup="enableAndDisable()" id=inputFinal    type=number>	<br>
 </p>
 
 <style>
@@ -42,9 +39,6 @@ input
 
 </style>
 
-<br>
-
-
 <button id=btnAdd   onclick="addCourse()" 	 disabled="true"> Add</button> <br>
 
 <button id=btnPrint onclick="printCourse()"> Print</button>
@@ -55,13 +49,11 @@ input
 <p><b>Name &emsp; Average</b></p>				<p id="pgAv"></p><hr>
 <p><b>Name &emsp; Max</b></p>					<p id="pgMax"></p><hr>
 
- 
 <script>
 	
 	var courseArray=[]
 	var index=0
 	var max=0
-	var maxName=""
 	
 function enableAndDisable()
 {
@@ -72,14 +64,12 @@ function enableAndDisable()
 		else
 		{
 			document.getElementById("btnAdd").disabled   = false;
-			
 		}
 		
-	
 }
 function addCourse()
 {
-		 document.getElementById("btnAdd").disabled   = true;
+	     document.getElementById("btnAdd").disabled   = true;
 	     courseArray[index++] = [inputName.value,Number(inputMidterm.value),Number(inputFinal.value)];
 	     inputName.value="";
 	     inputMidterm.value="";
@@ -91,18 +81,15 @@ function printCourse()
 	pgCo.innerHTML = ""
 	for (var i = 0; i < courseArray.length; i++)
 	 {
-		 
-		pgCo.innerHTML += courseArray[i][0]+  "&emsp; &emsp; &emsp;" + courseArray[i][1]+ "&emsp;&emsp; &emsp;" +courseArray[i][2]+ "<br>"
+	    pgCo.innerHTML += courseArray[i][0]+  "&emsp; &emsp; &emsp;" + courseArray[i][1]+ "&emsp;&emsp; &emsp;" +courseArray[i][2]+ "<br>"
 	 }
-	 
-	 
+	
 }
 function avg()
 {
 	pgAv.innerHTML= "" 
-	
 	var ort=0
-	
+
 	for (var i = 0; i < courseArray.length; i++)
 	 {
 		ort=(courseArray[i][1]+courseArray[i][2])/2
@@ -118,13 +105,19 @@ function avg()
 }
 function avgMax()
 {	
-	if(index!=0)
+	pgMax.innerHTML=""
+	for (var i = 0; i < courseArray.length; i++)
 	 {
-	   pgMax.innerHTML = maxName + "&emsp; &emsp; &emsp;"+ max + "<br>"
+		ort=(courseArray[i][1]+courseArray[i][2])/2
+		if(ort>max)
+		{
+			max=ort
+			
+		}
+		pgMax.innerHTML= courseArray[i][0]+ "&emsp; &emsp; &emsp;"+max+ "<br>"
 	 }
-	
+	 	
 }
-
 
 </script>
 
