@@ -8,7 +8,7 @@ function tableFor(evt) {
   let table = [0, 0, 0, 0];
   for (let entry of JOURNAL) {
     let index = 0;
-    if (entry.events.includes(evt)) index += 1;
+    if (entry.events.includes(evt))  index += 1;
     if (entry.squirrel) index += 2;
     table[index] += 1;
   }
@@ -17,10 +17,15 @@ function tableFor(evt) {
 
 function analyze(min=0) {
   let a = [];
+  
   for (let evt of EVENTS) {
-    let cor = phi(tableFor(evt));
+    let table = tableFor(evt);
+    let cor = phi(table);
+    
+    let days = table[1] + table [3];
+    
     if (Math.abs(cor) > min)
-      a.push(evt +": "+cor.toFixed(4))
+      a.push(evt +": "+cor.toFixed(4) +"  "+days);
   }
   return a
 }
@@ -33,8 +38,8 @@ function journalEvents() {
 }
 
 class Chap4 extends Menu {
-  correlation(evt) { 
-    return phi(window.tableFor(evt)) 
+  correlation(evt) {
+    return phi(window.tableFor(evt))
   }
   analyze(val) {
     return window.analyze(val)
