@@ -89,7 +89,9 @@ class Distance
 constructor()
 {
 	super()
+	
 	this.student=new Student(1,"Akif",3)
+	this.student.courses.push("Blm305")
 	this.course= new Course("blm305","2.00","12.10.2018",101)
 	this.distance= new Distance(300,3)
 	this.point3d= new Point3D(4,7,8)
@@ -106,8 +108,7 @@ function init() {
     a = [0, 11, "22", "abc"];
     c = {len, name, pi, sqrt, power};
     MENU = new Cw4(); //global
-    display(MENU); 
-  
+	
     display(MENU);
 }
     docName.innerText = "Inspector "+VERSION;
