@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link href="https://maeyler.github.io/JS/sss/inspector.css" 
+          rel="stylesheet" media="all">
+    <script src="https://maeyler.github.io/JS/sss/inspector.js"></script>
+    
+    <script src="database.js"></script>
+
+    <title>Eloquent JavaScript </title>
+</head>
+
+<body>
+<p><b id=docName></b> &nbsp;
+<a href="https://yrgp.github.io/apt/">Read me</a> &nbsp;
+<a href="https://maeyler.github.io/JS/sss/Turkish">Turkish</a>
+</p>
+
+<script>
+	
+class Point
+{
+	constructor(x,y)
+	{
+		this.x=x
+		this.y=y
+	}
+	toString()
+	{
+		return "(" + this.x + "," + this.y + ")"
+	}
+}
+class Point3D extends Point
+{
+	constructor(x,y,z)
+	{
+		super(x,y)
+		this.z=z
+	}
+	toString()
+	{
+		return "(" + this.x + "," + this.y + "," + this.z + ")"
+	}
+}
+
+class Distance
+{
+	constructor(km,m)
+	{
+		this.km=km
+		this.miles=m
+	}
+	setKm(km)
+	{
+		this.km=km
+	}
+	getKm()
+	{
+		return this.km
+	}
+	
+	setMiles(m)
+	{
+		this.miles=m
+	}
+	getMiles()
+	{
+		return this.miles
+	}
+	
+	toString()
+	{
+		return this.km + " km"
+	}
+}
+
+
+</script>
+
+
+<script>
+"use strict";
+
+ class Cw4 extends Menu
+{
+	
+constructor()
+{
+	super()
+	this.student=new Student(1,"Akif",3)
+	this.course= new Course("blm305","2.00","12.10.2018",101)
+	this.distance= new Distance(300,3)
+	this.point3d= new Point3D(4,7,8)
+	this.point= new Point(4,7)
+}	
+}
+
+
+var a, b, c, code;  //global variables
+function init() {
+    let
+       len = 123, name = "Circle", pi = Math.PI, 
+       sqrt = Math.sqrt, power = Math.pow;
+    a = [0, 11, "22", "abc"];
+    c = {len, name, pi, sqrt, power};
+    MENU = new Cw4(); //global
+    display(MENU); 
+  
+    display(MENU);
+}
+    docName.innerText = "Inspector "+VERSION;
+    try {
+        inspect(document.body, init); //makes the table
+        //inp.value = "new Number(c.pi)";
+    } catch(e) {
+        reportError(e);
+    }
+    
+    
+</script>
+
+
+
+	
+<p><input type=file multiple onChange='fileSelect(this)' />
+</p><p>
+<a href="https://yrgp.github.io/apt/lab2.html">CW2</a> 			&emsp;
+<a href="https://yrgp.github.io/apt/HW1.html">HW1</a>			&emsp;	
+<a href="https://yrgp.github.io/apt/inspector.html">CW3</a>		&emsp;
+<a href="https://yrgp.github.io/apt/CW3_SUM.png">CW3SUM</a> 	&emsp;
+
+</p>
+<pre id=disp1></pre>
+<img id=disp2 />
+
+</body>
+</html>
