@@ -13,11 +13,9 @@ BLM305E
 
 <b>Applications</b>
 
-[CW2](https://yrgp.github.io/apt/lab2.html)
+[CW2](https://yrgp.github.io/apt/Apps/CW2/strOperators.html)
 
-[CW3](https://yrgp.github.io/apt/inspector.html)
+[CW3](https://yrgp.github.io/apt/Apps/CW3/inspector.html)
 
-[CW3_SUM](https://yrgp.github.io/apt/CW3_SUM.png)
-
-[CW4](https://yrgp.github.io/apt/index.html)
+[CW4](https://yrgp.github.io/apt/Apps/CW4/index.html)
 
