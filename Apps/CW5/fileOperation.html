@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -114,26 +113,30 @@ function comp()
 {
    if(bol=="t")
    {
-	 msg.innerText="Found\n" 
+	 com.innerText="Found\n" 
 	 bol="f"
    } 
     else
     {
-	msg.innerText="Not found\n"
+	com.innerText="Not found\n"
 	}
 
 }
 
+function clr()
+{
+	msg.innerHTML=""
+	outLocal.innerHTML=""
+	outRemote.innerHTML=""
+
+}
 </script>
 
 <body>
 	
-
 <input id=button onChange='fileSelect(this)' type=file  multiple  />
 
 <br>
-
-
 
 <input type=text id=url value="test.txt">
 <!--onChange="readText()"-->
@@ -143,24 +146,18 @@ function comp()
 <input type=button id=state style="visibility: hidden">
 
 <br>
-<button id =b onclick="comp()" disabled="true">compare</button>
+<button id =b onclick="comp()" disabled="true">compare</button>  <button id =cl onclick="clr()">clear</button>
 <br>
-<output id=msg></output>
+	
+<p id=com></p>
 
+<b>Local File: </b> <br>
 
+<p id=msg></p>
 <p id=outLocal></p>
-
-<br>
-
-
-<pre id=outRemote></pre>
-
-
-
-<p id=deneme></p>
-
-
-
+	
+<hr>
+<b>Remote File: </b>  <p id=outRemote></p>
 
 </body>
 </html>
