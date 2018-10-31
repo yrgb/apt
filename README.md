@@ -1,6 +1,6 @@
 # apt
 
-This repository is dedicated to examples of (advanced programing techniques) lesson.
+This repository is dedicated to examples of (Advanced programing techniques) lesson.
 
 BLM305E
 
