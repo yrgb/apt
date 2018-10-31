@@ -12,6 +12,7 @@
 let loc= ""
 let reo= ""
 let bol="f"
+let bolName=""
 //------------------------------------------------------read remote file---------------------------------------------------
 function hide() {
     state.style.visibility = "hidden";
@@ -87,8 +88,11 @@ function fileSelect(t)
           //  outLocal.innerHTML += "<img class=thumb "   +"src='"+a+"' title='"+f.name+"' />";
           outLocal.innerHTML+=
              loc=a
-             if(loc==reo){bol="t"}
-				
+			 if(loc==reo)
+              {
+	           bol="t"
+			   bolName=f.name
+	         }				
             console.log(f.name+size+f.type);
         };
         reader.readAsDataURL(f);
@@ -100,7 +104,11 @@ function fileSelect(t)
            //  outLocal.innerHTML += "<pre>"+a+"</pre>";
             
             loc=a;
-            if(loc==reo){bol="t"}
+            if(loc==reo)
+             {
+	       	  bol="t"
+		   	  bolName=f.name
+	         }
 
             console.log(f.name+size+f.type);
         };
@@ -123,7 +131,7 @@ function comp()
 {
    if(bol=="t")
    {
-	 com.innerText="Found\n" 
+	 com.innerText="Found in: (" + bolName +")\n" 
 	 
 	 b.disabled=true
    } 
@@ -140,8 +148,10 @@ function clr()
 	outLocal.innerHTML=""
 	outRemote.innerHTML=""
 	com.innerHTML=""
+
 }
 </script>
+
 
 <body>
 	
@@ -150,6 +160,8 @@ function clr()
 <input id=button onChange='fileSelect(this)' type=file  multiple  />
 
 <br>
+
+
 
 <input type=text id=url placeholder="Enter your url here">
 <!--onChange="readText()"-->
@@ -176,6 +188,8 @@ function clr()
 
 <pre id=outRemote style="color:blue;" ></pre>
 
+
+
 <style>
 
 input
@@ -184,7 +198,7 @@ input
  }
  button
  {
-	width: 120px; 
+	width: 110px; 
 	float: left;
  }
 
