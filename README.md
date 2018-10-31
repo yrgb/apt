@@ -6,7 +6,7 @@ BLM305E
 
 <b>Home works:</b>
 
-[HW1](https://yrgp.github.io/apt/HW1/addCourse.html)
+[HW1](https://yrgp.github.io/apt/HW1/addCource.html)
 
 [HW2](https://yrgp.github.io/apt/HW2/Database.html)
 
