@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Read local file </title>
+</head>
+
+<script>
+"use strict";
+
+let loc= ""
+let reo= ""
+let bol="f"
+//------------------------------------------------------read remote file---------------------------------------------------
+function hide() {
+    state.style.visibility = "hidden";
+}
+function show(v) {
+    state.value = v; state.style.visibility = "";
+}
+function report(tx, n) {
+    show("OK"); setTimeout(hide, 1000);
+    outRemote.innerText = tx;
+    
+    reo=tx
+    console.log(n? n : t);
+}
+function readText() {
+    show("FT"); // fetch text
+    fetch(url.value)
+      .then(r => r.text()) 
+      //response of fetch() is r
+      .then(t => report(t, t.length+" chars"));  
+      //response of text() is t
+}
+function readBlob() {
+    show("FB"); // fetch blob
+    fetch(url.value)
+      .then(r => r.blob())  //response r
+      .then(b => report(b.size+" bytes"));
+}
+
+
+
+//------------------------------------------------------read local file---------------------------------------------------
+
+let reader = new FileReader();
+function isText(f) {
+    console.assert(f instanceof File);
+    return f.type.startsWith("text") || f.name.endsWith(".md")
+         || f.name.endsWith(".js")  || f.name.endsWith(".java");
+}
+
+function fileSelect(t)
+
+ { //target is the button
+    console.assert(t == button);
+    let f = t.files[0];
+	let size=0
+	
+    for(let i =0; i<t.files.length; i++)
+    {
+	reader = new FileReader();
+	
+	f = t.files[i]
+   
+    size = " "+f.size+" bytes ";
+    msg.innerText +=  (i+1)+".File is: (" + f.name + "), Type: ("+f.type+ "), Size: (" +size +")\n";
+    
+    
+    if (f.type.startsWith("image")) {
+        reader.onload = function(evt) {
+            const a = evt.target.result; //image source
+
+            outLocal.innerHTML += "<img class=thumb "
+                +"src='"+a+"' title='"+f.name+"' />";
+             loc=a
+             if(loc==reo){bol="t"}
+				
+            console.log(f.name+size+f.type);
+        };
+        reader.readAsDataURL(f);
+    } else if (isText(f)) {
+        reader.onload = function(evt) { //text
+            const a = evt.target.result;
+			console.log(a);
+			 outLocal.innerHTML += f.name + ":"
+            outLocal.innerHTML += "<pre>"+a+"</pre>";
+            
+            loc=a;
+            if(loc==reo){bol="t"}
+
+            console.log(f.name+size+f.type);
+        };
+        reader.readAsText(f);
+        b.disabled=false
+    } else {
+        msg.innerText += "Unknown ";
+        out.innerText = "";
+    }
+    
+
+
+
+  }
+  
+  
+    
+}
+
+function comp()
+{
+   if(bol=="t")
+   {
+	 msg.innerText="Found\n" 
+	 bol="f"
+   } 
+    else
+    {
+	msg.innerText="Not found\n"
+	}
+
+}
+
+</script>
+
+<body>
+	
+
+<input id=button onChange='fileSelect(this)' type=file  multiple  />
+
+<br>
+
+
+
+<input type=text id=url value="test.txt">
+<!--onChange="readText()"-->
+
+<input type=button value="text" onClick="readText()">
+<input type=button value="blob" onClick="readBlob()">
+<input type=button id=state style="visibility: hidden">
+
+<br>
+<button id =b onclick="comp()" disabled="true">compare</button>
+<br>
+<output id=msg></output>
+
+
+<p id=outLocal></p>
+
+<br>
+
+
+<pre id=outRemote></pre>
+
+
+
+<p id=deneme></p>
+
+
+
+
+</body>
+</html>
