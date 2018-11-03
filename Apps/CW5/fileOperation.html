@@ -9,20 +9,12 @@
 <script>
 "use strict";
 
-let loc= ""
+let loc = new Map()
+let locArray=[]
 let reo= ""
-let bol="f"
-let bolName=""
 //------------------------------------------------------read remote file---------------------------------------------------
-function hide() {
-    state.style.visibility = "hidden";
-}
-function show(v) {
-    state.value = v; state.style.visibility = "";
-}
-function report(tx, n) {
-    show("OK"); setTimeout(hide, 1000);
-    
+
+function report(tx, n) {    
     //outRemote.innerText = tx;
     outRemote.innerText = "("+url.value + ") file has been readed"
     reo=tx
@@ -32,7 +24,6 @@ function printSize(s) {
     outRemote.innerText =  "("+url.value + ") file size is: "+  s;
 }
 function readText() {
-    show("FT"); // fetch text
     fetch(url.value)
       .then(r => r.text()) 
       //response of fetch() is r
@@ -40,7 +31,6 @@ function readText() {
       //response of text() is t
 }
 function readBlob() {
-    show("FB"); // fetch blob
     fetch(url.value)
       .then(r => r.blob())  //response r
       .then(b => printSize(b.size+" bytes"));
@@ -63,9 +53,7 @@ function fileSelect(t)
 	outLocal.innerHTML=""
 	msg.innerHTML=""
 	com.innerHTML=""
-
-	bol="f"
-	 
+	loc.clear()
     console.assert(t == button);
     let f = t.files[0];
 	let size=0
@@ -79,21 +67,17 @@ function fileSelect(t)
    
     size = " "+f.size+" bytes ";
     msg.innerHTML +=  (i+1)+".File is: (" + f.name + "), Type: ("+f.type+ "), Size: (" +size +")<br>";
-    
-    
+    locArray.push(f.name) /////
+   var fCount=0
     if (f.type.startsWith("image")) {
         reader.onload = function(evt) {
             const a = evt.target.result; //image source
 
           //  outLocal.innerHTML += "<img class=thumb "   +"src='"+a+"' title='"+f.name+"' />";
-          outLocal.innerHTML+=
-             loc=a
-			 if(loc==reo)
-              {
-	           bol="t"
-			   bolName=f.name
-	         }				
-            console.log(f.name+size+f.type);
+
+            loc.set(a,locArray.shift())
+	
+           console.log(f.name,size,f.type);
         };
         reader.readAsDataURL(f);
     } else if (isText(f)) {
@@ -102,17 +86,12 @@ function fileSelect(t)
 			console.log(a);
 			// outLocal.innerHTML += f.name + ":"
            //  outLocal.innerHTML += "<pre>"+a+"</pre>";
-            
-            loc=a;
-            if(loc==reo)
-             {
-	       	  bol="t"
-		   	  bolName=f.name
-	         }
-
-            console.log(f.name+size+f.type);
-        };
-        reader.readAsText(f);
+            loc.set(a,locArray.shift())
+		
+            console.log(loc,f.name,size,f.type);
+        }; ///
+        
+        reader.readAsText(f); ////
         b.disabled=false
     } else {
         msg.innerHTML += "Unknown ";
@@ -120,26 +99,17 @@ function fileSelect(t)
     }
     
 
-
   }
-  
   
     
 }
 
 function comp()
 {
-   if(bol=="t")
-   {
-	 com.innerText="Found in: (" + bolName +")\n" 
-	 
-	 b.disabled=true
-   } 
+	if(loc.get(reo)!=undefined)
+	   com.innerHTML="Found in: (" + loc.get(reo)+ ")<br>"
     else
-    {
-	com.innerText="Not found\n"
-	}
-
+	   com.innerHTML="Not found<br>"
 }
 
 function clr()
@@ -148,7 +118,6 @@ function clr()
 	outLocal.innerHTML=""
 	outRemote.innerHTML=""
 	com.innerHTML=""
-
 }
 </script>
 
@@ -157,36 +126,42 @@ function clr()
 	
 <h1 align="center">File operations</h1>
 
-<input id=button onChange='fileSelect(this)' type=file  multiple  />
+<!-------------------------------------------------------------Remote files---------------------------------------------------------------->
+<fieldset>
+    <legend>Read remote file</legend>
+        <label for="url">Enter The url of the file you want to read:</label>
+        <input type="url" id=url value=""
+               placeholder="https://example.com"
+               pattern="https://.txt" size="50" required/>
+        <input type=button value="Fetch"  onClick="readText()" >
+		<input type=button value="Size" onClick="readBlob()">
 
-<br>
+</fieldset><label style="color:#552dc4;">Ex: https://maeyler.github.io/BLM305/README.md</label><br><br>
 
 
+<!-------------------------------------------------------------Local files---------------------------------------------------------------->
+<fieldset>
+    <legend>Read local file</legend>
+        <label>Choose the local file/s you want to read:</label>
+       <input id=button onChange='fileSelect(this)' type=file  multiple  /> <br>
+ 
+</fieldset><br>
 
-<input type=text id=url placeholder="Enter your url here">
-<!--onChange="readText()"-->
+<!--------------------------------------------------------------Buttons------------------------------------------------------------------->
+<button id =b onclick="comp()" disabled="true">compare</button>  <button id =cl onclick="clr()">clear</button> <br>
 
-<input type=button value="run"  onClick="readText()">
-<input type=button value="Size" onClick="readBlob()">
-
-<input type=button id=state style="visibility: hidden">
-
-<br>
-<button id =b onclick="comp()" disabled="true">compare</button>  <button id =cl onclick="clr()">clear</button>
-
-<br>
 <p id=com  style="color:red;"></p>
 
 <b>Local File: </b> <br>
 
 <p id=msg style="color:blue;" ></p>
 
-<p id=outLocal style="color:blue;" > </p> <br>
+<p id=outLocal style="color:blue;" > </p> <hr>
 
 
-<hr><b>Remote File: </b>
+<b>Remote File: </b>
 
-<pre id=outRemote style="color:blue;" ></pre>
+<pre id=outRemote style="color:blue;" ></pre><hr>
 
 
 
@@ -198,9 +173,10 @@ input
  }
  button
  {
-	width: 110px; 
+	width: 120px; 
 	float: left;
  }
+</style>
 
 </body>
 </html>
