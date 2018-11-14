@@ -21,3 +21,5 @@ BLM305E
 
 [CW5](https://yrgp.github.io/apt/Apps/CW5/fileOperation.html)
 
+[CW6](https://yrgp.github.io/apt/Apps/CW6/Timing.html)
+
