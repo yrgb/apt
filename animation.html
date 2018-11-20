@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <title>carpmamaya calis</title></head>
+
+<style>
+ html {
+      background: #ffffb9;
+    }
+
+   .elem{  
+  
+  height: 30px;
+  width: 30px;
+  background-color: red;
+}
+
+   .box1 {
+  margin: auto;
+
+  height: 50px;
+  width: 50px;
+  background-color: blue;
+}
+   .box2 {
+  position: absolute;
+  top: 130px;
+  right: 200px;
+  height: 50px;
+  width: 50px;
+  background-color: #002102;
+}
+
+ </style>
+ 
+ 
+<body>
+	<h1 style="color: #5211a5;  text-align: center">Kutulara çarpmaya çalış</h1>
+
+    <input id ="r" type="button" onclick="right()" value="right">
+    <input type="button" onclick="left()" value="left">
+    <input type="button" onclick="up()" value="up">
+    <input type="button" onclick="down();" value="down">
+    <input type="button" onclick="stop();" value="stop">
+    <input type="button" onclick="reset();" value="reset">
+    <input type="button" onclick="hardEasy(0)" value="easy">
+	<input type="button" onclick="hardEasy(Infinity)" value="hard">
+
+   <div id="container" >
+        <div id="rightLeft">
+            <div id="box" class="elem"></div>
+
+        </div>
+    </div>
+
+<div id=box1 class='box1'></div> 
+
+<div id=box2 class='box2'></div> 
+
+</body>
+
+<script>
+    
+    let b = document.getElementById("box")
+    let b1 = document.getElementById("box1")
+        let b2 = document.getElementById("box2")
+
+    
+    let rightLeft = document.getElementById("rightLeft")
+    
+    let moveRight = { transform: ["translateX(0)", "translateX(100vw)"] }
+    let moveDown = { transform: ["translateY(0)",  "translateY(100vw)"] }
+    
+    var frames2 = [
+  {transform: 'rotate(0)'},
+  {transform: 'rotate(180deg)'},
+  {transform: 'rotate(0)'}
+]
+
+var options3 = {
+  duration: 2000,
+  iterations: Infinity,
+  easing: 'ease-out',
+}
+
+
+    let h = rightLeft.animate(moveRight, 4000);
+    
+ //   b2.animate(frames2,options3)
+    
+    h.pause()
+    let a = b.animate(moveDown, 4000);
+    a.pause()
+    // a.pause()
+    function right() {
+        h.playbackRate = 1;
+        h.play()
+
+    }
+    function stop() {
+        a.pause()
+        h.pause()
+
+    }
+    function up() {
+        a.play();
+        a.playbackRate = -1;
+    }
+    function left() {
+        h.playbackRate = -1;
+        h.play()
+    }
+    function down() {
+        a.playbackRate = 1;
+        a.play();
+    }
+    function reset() {
+        a.finish()
+        h.finish()
+        g.pause()
+        f.pause()
+    }
+ 
+ let bd= document.getElementById("box").getBoundingClientRect()
+ let b1d=document.getElementById("box1").getBoundingClientRect()
+ let b2d=document.getElementById("box2").getBoundingClientRect()
+ 
+let moveDown2= { transform: ["translateY(0)", "translateY(450px)"]  }
+	
+var options1 = {
+  iterations: 0,
+  iterationStart: 0,
+  delay: 0,
+  endDelay: 0,
+  direction: 'alternate',
+  duration: 350,
+  fill: 'forwards',
+  easing: 'ease-out',
+}
+var options2 = {
+  iterations: 0,
+  iterationStart: 0,
+  delay: 0,
+  endDelay: 0,
+  direction: 'alternate',
+  duration: 350,
+  fill: 'forwards',
+  easing: 'ease-in',
+  
+
+}
+
+
+	let g= b1.animate(moveDown2, options1)	
+	let f =b2.animate(moveDown2, options2)
+function hardEasy(value)
+
+{
+	g.pause()
+	f.pause()
+	
+	options1.iterations=value
+	options2.iterations=value
+	
+	g= b1.animate(moveDown2, options1)	
+	f= b2.animate(moveDown2, options2)
+	
+}
+
+
+setInterval(function() {
+	bd=document.getElementById("box").getBoundingClientRect()
+	b1d=document.getElementById("box1").getBoundingClientRect()
+	b2d=document.getElementById("box2").getBoundingClientRect()
+	
+ if((bd.top<(b1d.top+b1d.height) && bd.top>(b1d.top-b1d.height) && bd.x<(b1d.x+b1d.width) && bd.x>b1d.x) || 
+ ((bd.top<(b2d.top+b2d.height) && bd.top>(b2d.top-b2d.height) && bd.x<(b2d.x+b2d.width) && bd.x>b2d.x)) )
+ {
+	 	 	reset()
+	 	 	
+			setTimeout(function(){
+			    alert("kazandınız")
+			}, 100);
+			
+			
+ }
+ 
+ else if(bd.x>1200){
+	   a.playbackRate = 1;
+	   a.play();
+	    
+      
+ }
+ 
+  else if(bd.y>600){
+	   a.play();
+        a.playbackRate = -1;
+	 	
+ }
+ 
+/*
+   else if(bd.y>98){
+	  a.playbackRate = 1;
+        a.play();
+	 	
+ }
+*/
+ 
+ 
+}); 
+
+
+</script>
+
+</html>
