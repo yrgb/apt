@@ -2,41 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-
+	
   <title>CW7</title></head>
-
-   <link rel="manifest" href="manifest.json">
-    <title>Convert Text Data to HTML Table</title>
-    
+  <link rel="manifest" href="manifest.json">
+  <title>Convert Text Data to HTML Table</title>
  
 <body>
-	<h1 style="color: #5211a5;  text-align: center">Data to table</h1>
-<button onclick="EnterData()">Run</button>
+<h1 style="color: #5211a5;  text-align: center">Data to table</h1>
+<button onclick="readData()">Run</button>
 
 <style>
     table { border-collapse: collapse; }
     th { color: blue; padding: 5px 5px; }
     td { 
-        border: 1px solid blue; 
+        border: 3px solid blue; 
         padding: 5px 5px; 
         text-align: center; 
-    }
-    td:hover .tip { visibility: visible; }
-    .tip {
-        visibility: hidden;
-        font-size: small;
-        background-color: blue;
-        color: white;
-        text-align: center;
-        padding: 5px 5px;
-        position: absolute;
-    }
+	   }
 </style>
-
-
-
-Ref: 
 	
+Ref: 
 <a href="https://yrgp.github.io/apt/Apps/CW7/table.html" target="ExternalDocument">CW7/Data to table</a>
 
 <a href="https://yrgp.github.io/apt/HW3/animation.html" target="ExternalDocument">HW3/Animation</a>
@@ -45,108 +30,50 @@ Ref:
 	
 </body>
 
-<script>
-    
-class Student
-{
-    constructor (id, name, gpa, courses)
-    {
-        this.id = id;
-        this.name = name;
-        this.gpa = gpa;
-        this.courses = courses;
-        
-    }
-    toString ()
-    {
-        return this.id+'';
-    }
-}
-
-class Database
-{
-    constructor ()
-      {
-        this.students = new Map()
-        this.k=[]
-        this.readSData()
-      }
-           
-     readSData ()
+<script>   
+   function readData ()
      {
+	    let stdArray=[]  
         var url = "https://yrgp.github.io/apt/HW2/Students.txt"
         fetch(url)
         .then(res => res.text())
-        .then(res => [this.addStudents(res)]) 
-     }
-     
-
-    
-    addStudents(txt)
-     {
-      let a = txt.split("\n");
-      
-	 
-	  for (let line of a)
-       {
-          let b = line.split("\t");
-          let id = b[0], name = b[1], gpa = b[2];
-          let list = [];
-          for (let i=3; i<b.length; i++){list.push(b[i]);}
-          
-     	  const std = new Student(id, name, gpa, list);
-    	  this.students.set(std.id, std);
-    	  this.k.push(std)
-		}
-            
-	}
-
-
-
-}
-
-let a = new Student();
-let array = Object.getOwnPropertyNames(a);
-
-let d = new Database()
- let std=""
-
-function EnterData() {
-let m =array.length
-let n = d.k.length
-
- let row = "<th></th>";
-   
-   array.forEach(function(j) {
-	  row += "<th>"+j+"</th>";
-	  console.log(j);
-	});
-
-   
-        
-    let text = "<tr>"+row+"</tr>";
-    
-    for (let i = 1; i <= m; i++) 
-       row = "<th>"+i+"</th>";
-       
-      for(let j =0; j<n-1; j++){
-	       row = "<th>"+(j+1)+"</th>";
-          std = d.k[j];
-		  row += "<td>"+std.id+"</td>";
-          row += "<td>"+std.name+"</td>";
-          row += "<td>"+std.gpa+"</td>";
-		  row += "<td>"+std.courses.length+"</td>";
-		  text += "<tr>"+row+"</tr>";
-      }   
-       
-      
-    
-    
-    const t = text.length+" chars";
-    console.log("makeRows: "+m+"x"+n+" "+t);
-    tablo.innerHTML = text;
-}
-
+        .then(res => {
+	      let a = res.split("\n");
+	      
+	     let row = "<th></th>";
+		 let text = "<tr>"+row+"</tr>";
+		  for (let line of a)
+	        {
+	          let b = line.split("\t");
+	          let id = b[0], name = b[1], gpa = b[2];
+	          let list = [];
+	          for (let i=3; i<b.length; i++)
+	         	 list.push(b[i]);
+	          stdArray.push([id,name,gpa,list])
+			}
+			
+			let m= stdArray[0].length
+			let n =stdArray.length
+			let std=""
+			
+			for (let i = 1; i <= m; i++) 
+		       row = "<th>"+i+"</th>";
+		       
+		      for(let j =0; j<n-1; j++){
+			      row = "<th>"+(j+1)+"</th>";
+		          std = stdArray[j];
+				  row += "<td>"+std[0]+"</td>";
+		          row += "<td>"+std[1]+"</td>";
+		          row += "<td>"+std[2]+"</td>";
+		          
+				  row += "<td>"+std[3].length+"</td>";
+				  text += "<tr>"+row+"</tr>";
+		      }   
+		         tablo.innerHTML = text;
+		
+		    });	
+	 }
+	
 </script>
 
 </html>
