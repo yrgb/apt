@@ -5,7 +5,16 @@
 
   <title>CW7</title></head>
 
- 
+   <link rel="manifest" href="manifest.json">
+    <title>Convert Text Data to HTML Table</title>
+    <script>
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker
+            .register('sw.js')
+            .then((reg) => { console.log('SW Registered', reg) })
+            .catch(console.log)
+        }
+    </script>
  
 <body>
 	<h1 style="color: #5211a5;  text-align: center">Data to table</h1>
@@ -92,17 +101,6 @@ class Database
 		}
             
 	}
-
-
-
-   //----------------------------------------islemler------------------------------------------------
-  randomStd()
-  {
-      const keys = Array.from(this.students.keys())
-      let key = keys[Math.trunc(keys.length * Math.random())];
-      let std = this.students.get(key);
-       return ("Random Student: "+std.name +" "+ std.id);
-  }
 
 
 
