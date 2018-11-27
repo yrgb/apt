@@ -2,7 +2,7 @@
     "name": "Adv Prog by Yusuf Ragip",
     "description": "Advanced Programming Applications",
     "short_name": "AdvProg",
-    "start_url": "/apt/Apps/index.html",
+    "start_url": "/apt/index.html",
     "display": "standalone",
     "background_color": "white",
     "theme_color": "#457cdb",
