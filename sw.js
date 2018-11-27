@@ -1,8 +1,4 @@
 const CACHE ='AdvProg'
-function installCB(e) {
-  console.log('install oldu', e.request);
-}
-self.addEventListener('install', installCB)
 
 function save(req, resp) {
   return caches.open(CACHE)
@@ -14,7 +10,7 @@ function save(req, resp) {
 }
 function fetchCB(e) { //fetch first
   let req = e.request
-  console.log('JS', req.url);
+  console.log('BLM', req.url);
   e.respondWith(
     fetch(req).then(r2 => save(req, r2))
     .catch(() => { return caches.match(req).then(r1 => r1) })
