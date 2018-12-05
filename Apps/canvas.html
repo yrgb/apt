@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Canvas </title>
+
+  <style>
+    svg {
+        background: #f2ffd8;
+		
+    }
+  </style>
+</head>
+
+<body>
+
+
+
+
+<h2 style="text-align: center; color: #000069;">Using SVG</h2>
+<svg id='svg' width='500' height='300'>
+	
+  <circle id=cir cx='50' cy='50' r='40'
+  style='fill:yellow;stroke:blue;stroke-width:4' />
+
+  
+  <rect id=rect x='350' y='10' width='100' height='80'
+  style='fill:pink;stroke:red;stroke-width:5' />
+
+</svg>
+<br>
+<b>select circle or rectangle</b>
+<br>
+<select id =select>
+  <option value="circle">Circle</option>
+  <option value="rectangle">Rectangle</option>
+</select>
+<br>
+
+ <input id=size type="number">
+ <button onclick="changeSize(size.value)">change Size</button>
+<br>
+<label>x</label><input id=xVal type="number">
+<label>y</label><input id=yVal type="number">
+<button onclick="changePlace(xVal.value,yVal.value)">change Place</button>
+<br>
+<input id=sVal type="number">
+<button onclick="changeStrok(sVal.value)">change Strok</button>
+<br>
+<input id=col type="color" value="#ff0000">
+
+<button onclick="changeColour(col.value)">change Colour</button>
+
+
+<hr />
+
+<p>Ref: <i>Eloquent JavaScript</i>,
+<a href="http://eloquentjavascript.net/17_canvas.html" 
+   target="ExternalDocument"> Chap 17</a>
+</p>
+
+<script>
+"use strict";
+function changeSize(size)
+{
+	let sel= document.getElementById("select")
+	let s= document.getElementById("cir")
+	let r= document.getElementById("rect")
+	if(sel.value=="circle")
+		s.r.baseVal.value=size
+	else
+		r.width.baseVal.value=size
+	
+}
+
+function changeStrok(val)
+{
+	let sel= document.getElementById("select")
+	let s= document.getElementById("cir")
+	let r= document.getElementById("rect")
+	if(sel.value=="circle")
+	{
+		s.style.strokeWidth=val
+
+	}
+	else
+	{
+		r.style.strokeWidth=val
+	}
+	
+}
+
+
+function changeColour(col)
+{
+	let sel= document.getElementById("select")
+	let s= document.getElementById("cir")
+	let r= document.getElementById("rect")
+	if(sel.value=="circle")
+		s.style.fill=col
+	else
+		r.style.fill=col
+	
+}
+
+function changePlace(x,y)
+{
+	let sel= document.getElementById("select")
+	let s= document.getElementById("cir")
+	let r= document.getElementById("rect")
+	if(sel.value=="circle")
+	{
+		s.cx.baseVal.value=x
+		s.cy.baseVal.value=y
+		
+
+	}
+	else
+	{
+		r.x.baseVal.value=x
+		r.y.baseVal.value=y
+	}
+	
+}
+</script>
+
+</body>
+</html>
