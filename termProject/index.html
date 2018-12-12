@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <title>Memory Game</title>
+
+</head>
+<style>
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+/*display: flex; */
+  background-image: url('geometry.png');
+}
+
+.memory-game {
+  width: 540px;
+  height: 540px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  perspective: 1000px;
+}
+
+.memory-card {
+  width: calc(25% - 10px);
+  height: calc(33.333% - 10px);
+  margin: 5px;
+  position: relative;
+  transform: scale(1);
+  transform-style: preserve-3d;
+  transition: transform .5s;
+  box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+}
+
+.memory-card:active {
+  transform: scale(0.97);
+  transition: transform .2s;
+}
+
+.memory-card.flip {
+  transform: rotateY(180deg);
+}
+
+.front-face,
+.back-face {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  position: absolute;
+  border-radius: 5px;
+  background: #00228d;
+  backface-visibility: hidden;
+}
+
+.front-face {
+  transform: rotateY(180deg);
+}
+
+</style>
+<body>
+ <h1 style="color: green;text-align: center">Memory Card Game</h1><br>
+ 
+ <center><label id="minutes">00</label>:<label id="seconds">00</label></center>
+
+  <section class="memory-game">
+    <div class="memory-card" data-framework="1">
+      <img class="front-face" src="1.png" alt="1" />
+      <img class="back-face" src="arka.png" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="1">
+      <img class="front-face" src="1.png" alt="1" />
+      <img class="back-face" src="arka.png" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework="7">
+      <img class="front-face" src="7.png" alt="7" />
+      <img class="back-face" src="arka.png" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="7">
+      <img class="front-face" src="7.png" alt="7" />
+      <img class="back-face" src="arka.png" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework="8">
+      <img class="front-face" src="8.png" alt="8" />
+      <img class="back-face" src="arka.png" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="8">
+      <img class="front-face" src="8.png" alt="8" />
+      <img class="back-face" src="arka.png" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework="9">
+      <img class="front-face" src="9.png" alt="9" />
+      <img class="back-face" src="arka.png" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="9">
+      <img class="front-face" src="9.png" alt="9" />
+      <img class="back-face" src="arka.png" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework="10">
+      <img class="front-face" src="10.png" alt="10" />
+      <img class="back-face" src="arka.png" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="10">
+      <img class="front-face" src="10.png" alt="10" />
+      <img class="back-face" src="arka.png" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework="erkek">
+      <img class="front-face" src="erkek.png" alt="erkek" />
+      <img class="back-face" src="arka.png" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework="erkek">
+      <img class="front-face" src="erkek.png" alt="erkek" />
+      <img class="back-face" src="arka.png" alt="JS Badge" />
+    </div>
+  </section>
+
+  <script>
+var minutesLabel = document.getElementById("minutes");
+var secondsLabel = document.getElementById("seconds");
+var totalSeconds = 0;
+
+
+function setTime() {
+  ++totalSeconds;
+  secondsLabel.innerHTML = pad(totalSeconds % 60);
+  minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+}
+
+function pad(val) {
+  var valString = val + "";
+  if (valString.length < 2) {
+    return "0" + valString;
+  } else {
+    return valString;
+  }
+}
+
+	
+	const cards = document.querySelectorAll('.memory-card');
+	
+	let hasFlippedCard = false;
+	let lockBoard = false;
+	let firstCard, secondCard;
+	let counter=0
+	let timeCounter=0
+	
+	let t
+	function flipCard() {
+
+	  if (lockBoard) return;
+	  if (this === firstCard) return;
+	  	  if(timeCounter==0)
+	  {
+	      t=setInterval(setTime, 1000);
+	      timeCounter=1
+	  }
+	  this.classList.add('flip');
+	
+	  if (!hasFlippedCard) {
+	    hasFlippedCard = true;
+	    firstCard = this;
+	
+	    return;
+	  }
+   
+	  secondCard = this;
+	  checkForMatch();
+	}
+	
+	function checkForMatch() {
+	  let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
+
+	  if(isMatch)
+	  {
+		  disableCards()
+		  counter+=1
+	  }
+	  else
+	  	unflipCards()
+	  	
+	  if(counter==cards.length/2)
+	  {
+		setTimeout(() => {
+		alert("You Win! \n time you use is: " + minutesLabel.outerText+"."+secondsLabel.outerText)
+	    reset()
+	  }, 700);
+	  	
+		  
+	  }
+	  
+	}
+	
+	function disableCards() {
+	  firstCard.removeEventListener('click', flipCard);
+	  secondCard.removeEventListener('click', flipCard);
+	
+	  resetBoard();
+	}
+	
+	function unflipCards() {
+	  lockBoard = true;
+	
+	  setTimeout(() => {
+	    firstCard.classList.remove('flip');
+	    secondCard.classList.remove('flip');
+	
+	    resetBoard();
+	  }, 700);
+	}
+	
+	function resetBoard() {
+	  [hasFlippedCard, lockBoard] = [false, false];
+	  [firstCard, secondCard] = [null, null];
+	}
+	
+	(function shuffle() {
+	  cards.forEach(card => {
+	    let randomPos = Math.floor(Math.random() * cards.length);
+	    card.style.order = randomPos;
+	  });
+	})();
+	
+	function reset()
+	{
+		for(let i of cards)		
+			i.classList.remove('flip')
+		
+		 clearInterval(t)
+		 secondsLabel.innerHTML = '00';
+		 minutesLabel.innerHTML = '00';
+		 timeCounter=0
+		 counter=0
+		 totalSeconds=0
+	}
+
+
+	
+	cards.forEach(card => card.addEventListener('click', flipCard));
+
+  </script>
+</body>
+</html>
