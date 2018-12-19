@@ -1,0 +1,17 @@
+{
+    "name": "Memory Card Game",
+    "description": "Project made by js,css and html",
+    "short_name": "MemoryCard",
+    "start_url": "/apt/termProject/index.html",
+    "display": "standalone",
+    "background_color": "white",
+    "theme_color": "#457cdb",
+    
+  "icons": [
+    {
+      "src": "jokerIcon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
