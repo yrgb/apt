@@ -30,4 +30,4 @@ BLM305E
 
 <b>Term Project:</b>
 
-[Memory Card v0.1](https://yrgp.github.io/apt/termProject/index.html)
+[Memory Card Game](https://yrgp.github.io/apt/termProject/index.html)
