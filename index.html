@@ -1,158 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=0.5">
 
-*{
-  padding: 0;
-  margin:  0;
-  box-sizing: border-box;
-}
-
-body {
-  height: 100vh;
-  /*display: flex; */
-  background-image: url('geometry.png');
-}
-
-.memory-game {
-  width: 700px;
-  height: 260px;
-  margin: auto;
-  padding: 0px;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.memory-card {
-  width: 130px;
-  height: 130px;
-  margin: 22px;
-  position: relative;
-  transform: scale(1);
-  transform-style: preserve-3d;
-  transition: transform .5s;
-  box-shadow: 1px 1px 1px rgba(0,0,0,.3);
-}
-
-.memory-card:active {
-  transform: scale(0.97);
-  transition: transform .2s;
-}
-
-.memory-card.flip {
-  transform: rotateY(180deg);
-}
-
-.front-face,
-.back-face {
-  width: 100%;
-  height: 100%;
-  padding: 20px;
-  position: absolute;
-  border-radius: 5px;
-  background: #223e75;
-  backface-visibility: hidden;
-}
-
-.front-face {
-  transform: rotateY(180deg);
-}
-
- 
-
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-.score-panel {
-    text-align: left;
-    width: 345px;
-    margin-bottom: 10px;
-}
-
-.score-panel .stars {
-    margin: 0;
-    padding: 0;
-    display: inline-block;
-    margin: 0 5px 0 0;
-}
-
-.score-panel .stars li {
-    list-style: none;
-    display: inline-block;
-}
-
-.gold-star{color: gold}
-
-.score-panel .restart {
-    float: right;
-    cursor: pointer;
-}
-
-
-.button {
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 8px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 15px;
-  margin: 4px 2px;
-  -webkit-transition-duration: 0.4s; /* Safari */
-  transition-duration: 0.4s;
-  cursor: pointer;
-}
-
-.button1 {
-  background-color: white; 
-  color: black; 
-  border: 2px solid #4CAF50;
-}
-
-.button1:hover {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.button2 {
-  background-color: white; 
-  color: black; 
-  border: 2px solid #008CBA;
-}
-
-.button2:hover {
-  background-color: #008CBA;
-  color: white;
-}
-
-.button3 {
-  background-color: white; 
-  color: black; 
-  border: 2px solid #f44336;
-}
-
-.button3:hover {
-  background-color: #f44336;
-  color: white;
-  
-}
-
-  .links {
-        margin-bottom: 0px;
-        padding-bottom: 0px;
-        font-family: Arial, Helvetica, sans-serif;
-    }
-   
-    .links ul li {
-        padding: 0px 0;
-    }
-    .links ul li a {
-        color: #ff6b6b;
-        font-weight: bold;
-     }   
-   .links ul li a:hover {
-        color: #bbbcbc;
-    }
+    <meta name="author" content="Youssof Ragheb"/>
+    <meta name="Description" content="memory,card,game,js,css,html">
+    <meta name="theme-color" content="white">
+    <link rel="icon" sizes="192x192" href="jokerIcon.png">
 	
+   <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+   <link rel="stylesheet" href="style.css">
+
+    <link rel="manifest" href="manifest.json"> 
+  <title>Memory Game</title>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register(' sw.js')
+        .then((reg) => { console.log('SW starts', reg.active) })
+        .catch(console.log)
+    }
+  </script>
+</head>
+
+<body>
+	
+	 <div class="container">
+        <header>
+	         <h1 style="color: #6f098b;text-align: center">Memory Card Game</h1><br>
+
+        </header>
+  
+ <center><button class="button button1" onclick="easy()">Easy</button> <button class="button button2" onclick="medium()">Medium</button> <button class="button button3" onclick="hard()">Hard</button></center>
+	
+ <center><label id="minutes">00</label>:<label id="seconds">00</label></center>
+ 
+<section class="score-panel">
+            <ul class="stars">
+                <li>
+                    <i class="fa fa-star gold-star"></i>
+                </li>
+                <li>
+                    <i class="fa fa-star gold-star"></i>
+                </li>
+                <li>
+                    <i class="fa fa-star gold-star"></i>
+                </li>
+            </ul>
+            <span class="moves">0</span> Moves
+            <div class="restart">
+                <i class="fa fa-repeat"></i> Restart game
+            </div>
+ </section>
+ </div>
+ 
+    
+        
+  <section class="memory-game">
+    <div class="memory-card" data-framework="1">
+      <img class="front-face" src="1.png" alt="1" />
+      <img class="back-face" src="arka.png" alt="arka" />
+    </div>
+    <div class="memory-card" data-framework="1">
+      <img class="front-face" src="1.png" alt="1" />
+      <img class="back-face" src="arka.png" alt="arka" />
+    </div>
+
+    <div class="memory-card" data-framework="7">
+      <img class="front-face" src="7.png" alt="7" />
+      <img class="back-face" src="arka.png" alt="arka" />
+    </div>
+    <div class="memory-card" data-framework="7">
+      <img class="front-face" src="7.png" alt="7" />
+      <img class="back-face" src="arka.png" alt="arka" />
+    </div>
+
+    <div class="memory-card" data-framework="8">
+      <img class="front-face" src="8.png" alt="8" />
+      <img class="back-face" src="arka.png" alt="arka" />
+    </div>
+    <div class="memory-card" data-framework="8">
+      <img class="front-face" src="8.png" alt="8" />
+      <img class="back-face" src="arka.png" alt="arka" />
+    </div>
+
+    <div class="memory-card" data-framework="9">
+      <img class="front-face" src="9.png" alt="9" />
+      <img class="back-face" src="arka.png" alt="arka" />
+    </div>
+    <div class="memory-card" data-framework="9">
+      <img class="front-face" src="9.png" alt="9" />
+      <img class="back-face" src="arka.png" alt="arka" />
+    </div>
+
+	<!------------------------medium-------------------------->
+	
+    <div class="memory-card" data-framework="10" id=m1>
+	 
+	      <img class="front-face" src="10.png" alt="10" />
+	      <img class="back-face" src="arka.png" alt="arka" />
+	    </div>
+	    <div class="memory-card" data-framework="10" id =m2>
+	      <img class="front-face" src="10.png" alt="10" />
+	      <img class="back-face" src="arka.png" alt="arka" />
+	    </div>
+	
+	    <div class="memory-card" data-framework="erkek" id =m3>
+	      <img class="front-face" src="erkek.png" alt="erkek" />
+	      <img class="back-face" src="arka.png" alt="arka" />
+	    </div>
+	    <div class="memory-card" data-framework="erkek" id =m4>
+	      <img class="front-face" src="erkek.png" alt="erkek" />
+	      <img class="back-face" src="arka.png" alt="arka" />
+     
+    </div>
+    
+    
+	<!------------------------hard-------------------------->
+    <div class="memory-card" data-framework="kiz" id =h1>
+      <img class="front-face" src="kiz.png" alt="kiz" />
+      <img class="back-face" src="arka.png" alt="arka" />
+    </div>
+    <div class="memory-card" data-framework="kiz" id =h2>
+      <img class="front-face" src="kiz.png" alt="kiz" />
+      <img class="back-face" src="arka.png" alt="arka" />
+    </div>
+
+    <div class="memory-card" data-framework="yasli" id =h3>
+      <img class="front-face" src="yasli.png" alt="yasli" />
+      <img class="back-face" src="arka.png" alt="arka" />
+    </div>
+    <div class="memory-card" data-framework="yasli" id =h4>
+      <img class="front-face" src="yasli.png" alt="yasli" />
+      <img class="back-face" src="arka.png" alt="arka" />
+
+    </div>
+  </section>
+      <script src=script.js></script>
+
+  <div class="links">
+
+	 <h3>References</h3>
+	    <ul>
+	        <li><a href="https://marina-ferreira.github.io/projects/js/memory-game/">Marina memory card project</a></li>
+	        <li><a href="https://www.w3schools.com/">W3School</a></li>
+	        <li><a href="https://developer.mozilla.org/tr/">MDN Web Docs</a></li>
+	        <li><a href="https://css-tricks.com/">CSS-Tricks</a></li>
+	    </ul>
+   
+   </div>
+
+</body>
+</html>
