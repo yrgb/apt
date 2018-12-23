@@ -1,19 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 <head>
     <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=0.5">
-
-    <meta name="author" content="Youssof Ragheb"/>
-    <meta name="Description" content="memory,card,game,js,css,html">
+    <meta name="viewport" content="width=device-width">
+    <meta name="author" content="Youssof Ragheb" />
+    <meta name="Description" content="HTML,CSS,JavaScript">
     <meta name="theme-color" content="white">
-    <link rel="icon" sizes="192x192" href="jokerIcon.png">
-	
-   <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-   <link rel="stylesheet" href="style.css">
-
+    <link rel="icon" sizes="192x192" href="JS.png">
     <link rel="manifest" href="manifest.json"> 
-  <title>Memory Game</title>
+    <title>YoussofRagheb APT</title>
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker
@@ -24,132 +19,67 @@
   </script>
 </head>
 
-<body>
-	
-	 <div class="container">
-        <header>
-	         <h1 style="color: #6f098b;text-align: center">Memory Card Game</h1><br>
-
-        </header>
-  
- <center><button class="button button1" onclick="easy()">Easy</button> <button class="button button2" onclick="medium()">Medium</button> <button class="button button3" onclick="hard()">Hard</button></center>
-	
- <center><label id="minutes">00</label>:<label id="seconds">00</label></center>
- 
-<section class="score-panel">
-            <ul class="stars">
-                <li>
-                    <i class="fa fa-star gold-star"></i>
-                </li>
-                <li>
-                    <i class="fa fa-star gold-star"></i>
-                </li>
-                <li>
-                    <i class="fa fa-star gold-star"></i>
-                </li>
-            </ul>
-            <span class="moves">0</span> Moves
-            <div class="restart">
-                <i class="fa fa-repeat"></i> Restart game
-            </div>
- </section>
- </div>
- 
-    
-        
-  <section class="memory-game">
-    <div class="memory-card" data-framework="1">
-      <img class="front-face" src="1.png" alt="1" />
-      <img class="back-face" src="arka.png" alt="arka" />
-    </div>
-    <div class="memory-card" data-framework="1">
-      <img class="front-face" src="1.png" alt="1" />
-      <img class="back-face" src="arka.png" alt="arka" />
-    </div>
-
-    <div class="memory-card" data-framework="7">
-      <img class="front-face" src="7.png" alt="7" />
-      <img class="back-face" src="arka.png" alt="arka" />
-    </div>
-    <div class="memory-card" data-framework="7">
-      <img class="front-face" src="7.png" alt="7" />
-      <img class="back-face" src="arka.png" alt="arka" />
-    </div>
-
-    <div class="memory-card" data-framework="8">
-      <img class="front-face" src="8.png" alt="8" />
-      <img class="back-face" src="arka.png" alt="arka" />
-    </div>
-    <div class="memory-card" data-framework="8">
-      <img class="front-face" src="8.png" alt="8" />
-      <img class="back-face" src="arka.png" alt="arka" />
-    </div>
-
-    <div class="memory-card" data-framework="9">
-      <img class="front-face" src="9.png" alt="9" />
-      <img class="back-face" src="arka.png" alt="arka" />
-    </div>
-    <div class="memory-card" data-framework="9">
-      <img class="front-face" src="9.png" alt="9" />
-      <img class="back-face" src="arka.png" alt="arka" />
-    </div>
-
-	<!------------------------medium-------------------------->
-	
-    <div class="memory-card" data-framework="10" id=m1>
-	 
-	      <img class="front-face" src="10.png" alt="10" />
-	      <img class="back-face" src="arka.png" alt="arka" />
-	    </div>
-	    <div class="memory-card" data-framework="10" id =m2>
-	      <img class="front-face" src="10.png" alt="10" />
-	      <img class="back-face" src="arka.png" alt="arka" />
-	    </div>
-	
-	    <div class="memory-card" data-framework="erkek" id =m3>
-	      <img class="front-face" src="erkek.png" alt="erkek" />
-	      <img class="back-face" src="arka.png" alt="arka" />
-	    </div>
-	    <div class="memory-card" data-framework="erkek" id =m4>
-	      <img class="front-face" src="erkek.png" alt="erkek" />
-	      <img class="back-face" src="arka.png" alt="arka" />
-     
-    </div>
-    
-    
-	<!------------------------hard-------------------------->
-    <div class="memory-card" data-framework="kiz" id =h1>
-      <img class="front-face" src="kiz.png" alt="kiz" />
-      <img class="back-face" src="arka.png" alt="arka" />
-    </div>
-    <div class="memory-card" data-framework="kiz" id =h2>
-      <img class="front-face" src="kiz.png" alt="kiz" />
-      <img class="back-face" src="arka.png" alt="arka" />
-    </div>
-
-    <div class="memory-card" data-framework="yasli" id =h3>
-      <img class="front-face" src="yasli.png" alt="yasli" />
-      <img class="back-face" src="arka.png" alt="arka" />
-    </div>
-    <div class="memory-card" data-framework="yasli" id =h4>
-      <img class="front-face" src="yasli.png" alt="yasli" />
-      <img class="back-face" src="arka.png" alt="arka" />
-
-    </div>
-  </section>
-      <script src=script.js></script>
-
-  <div class="links">
-
-	 <h3>References</h3>
-	    <ul>
-	        <li><a href="https://marina-ferreira.github.io/projects/js/memory-game/">Marina memory card project</a></li>
-	        <li><a href="https://www.w3schools.com/">W3School</a></li>
-	        <li><a href="https://developer.mozilla.org/tr/">MDN Web Docs</a></li>
-	        <li><a href="https://css-tricks.com/">CSS-Tricks</a></li>
-	    </ul>
+<style>
+    .links {
+        margin-bottom: 0px;
+        padding-bottom: 0px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
    
-   </div>
+    .links ul li {
+        padding: 5px 0;
+    }
+    .links ul li a {
+        color: #ff6b6b;
+        font-weight: bold;
+     }   
+   .links ul li a:hover {
+        color: #bbbcbc;
+    }
+</style>
 
+<body>
+<h2 style="color: #11009b;text-align: center" id="advanced-programming">Advanced Programming Techniques</h2>
+	
+	 <hr>
+	<div class="links">
+	<h3>My Github Repo</h3>
+        <ul>
+            <li><a href="https://github.com/yrgp/apt">repo</a></li>
+        </ul>
+ <hr>
+        <h3>Class Works</h3>
+        
+        <ul>
+            <li><a href="https://yrgp.github.io/apt/Apps/CW2/strOperators.html">String Operations</a> (Week 2)</li>
+            <li><a href="https://yrgp.github.io/apt/Apps/CW3/inspector.html">Inspector</a> (Week 3)</li>
+            <li><a href="https://yrgp.github.io/apt/Apps/CW4/index.html">Inspector 2</a> (Week 4)</li>
+            <li><a href="https://yrgp.github.io/apt/Apps/CW5/fileOperation.html">Read File</a> (Week 5)</li>
+            <li><a href="https://yrgp.github.io/apt/Apps/CW6/Timing.html">Array vs Map</a> (Week 6)</li>
+            <li><a href="https://yrgp.github.io/apt/Apps/CW7/table.html">Table</a> (Week 7)</li>
+	    <li><a href="https://yrgp.github.io/apt/Apps/CW9/svg.html">SVG</a> (Week 9)</li>
+        </ul>
+      
+	 <hr>	
+        <h3>Home Works</h3>
+        <ul>
+            <li><a href="https://yrgp.github.io/apt/HW1/addCource.html">Array</a></li>
+            <li><a href="https://yrgp.github.io/apt/HW2/Database.html">Database</a></li>
+            <li><a href="https://yrgp.github.io/apt/HW3/animation.html">Animations</a></li>
+        </ul>
+        <hr>
+	<h3>Term Project</h3>
+	<ul>
+           <li><a href="https://yrgp.github.io/apt/termProject/index.html">Memory Card Game</a></li>
+        </ul>
+	<hr>
+        <h3>Useful Links</h3>
+        <ul>
+            <li><a href="https://www.w3schools.com/">W3School</a></li>
+            <li><a href="https://developer.mozilla.org/tr/">MDN Web Docs</a></li>
+            <li><a href="https://css-tricks.com/">CSS-Tricks</a></li>
+        </ul>
+	
+        </div>
 </body>
 </html>
