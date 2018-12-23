@@ -1,34 +1,152 @@
 
-<!DOCTYPE html>
-<html lang="en-US">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width">
-    <meta name="author" content="Youssof Ragheb" />
-    <meta name="Description" content="HTML,CSS,JavaScript">
-    <meta name="theme-color" content="white">
-    <link rel="icon" sizes="192x192" href="JS.png">
-    <link rel="manifest" href="manifest.json"> 
-    <title>YoussofRagheb APT</title>
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker
-        .register(' sw.js')
-        .then((reg) => { console.log('SW starts', reg.active) })
-        .catch(console.log)
-    }
-  </script>
-</head>
+*{
+  padding: 0;
+  margin:  0;
+  box-sizing: border-box;
+}
 
-<style>
-    .links {
+body {
+  height: 100vh;
+  /*display: flex; */
+  background-image: url('geometry.png');
+}
+
+.memory-game {
+  width: 700px;
+  height: 260px;
+  margin: auto;
+  padding: 0px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.memory-card {
+  width: 130px;
+  height: 130px;
+  margin: 22px;
+  position: relative;
+  transform: scale(1);
+  transform-style: preserve-3d;
+  transition: transform .5s;
+  box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+}
+
+.memory-card:active {
+  transform: scale(0.97);
+  transition: transform .2s;
+}
+
+.memory-card.flip {
+  transform: rotateY(180deg);
+}
+
+.front-face,
+.back-face {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  position: absolute;
+  border-radius: 5px;
+  background: #223e75;
+  backface-visibility: hidden;
+}
+
+.front-face {
+  transform: rotateY(180deg);
+}
+
+ 
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.score-panel {
+    text-align: left;
+    width: 345px;
+    margin-bottom: 10px;
+}
+
+.score-panel .stars {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    margin: 0 5px 0 0;
+}
+
+.score-panel .stars li {
+    list-style: none;
+    display: inline-block;
+}
+
+.gold-star{color: gold}
+
+.score-panel .restart {
+    float: right;
+    cursor: pointer;
+}
+
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 8px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button1 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #4CAF50;
+}
+
+.button1:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.button2 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #008CBA;
+}
+
+.button2:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
+.button3 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #f44336;
+}
+
+.button3:hover {
+  background-color: #f44336;
+  color: white;
+  
+}
+
+  .links {
         margin-bottom: 0px;
         padding-bottom: 0px;
         font-family: Arial, Helvetica, sans-serif;
     }
    
     .links ul li {
-        padding: 5px 0;
+        padding: 0px 0;
     }
     .links ul li a {
         color: #ff6b6b;
@@ -37,50 +155,4 @@
    .links ul li a:hover {
         color: #bbbcbc;
     }
-</style>
-
-<body>
-<h2 style="color: #11009b;text-align: center" id="advanced-programming">Advanced Programming Techniques</h2>
 	
-	 <hr>
-	<div class="links">
-	<h3>My Github Repo</h3>
-        <ul>
-            <li><a href="https://github.com/yrgp/apt">repo</a></li>
-        </ul>
- <hr>
-        <h3>Class Works</h3>
-        
-        <ul>
-            <li><a href="https://yrgp.github.io/apt/Apps/CW2/strOperators.html">String Operations</a> (Week 2)</li>
-            <li><a href="https://yrgp.github.io/apt/Apps/CW3/inspector.html">Inspector</a> (Week 3)</li>
-            <li><a href="https://yrgp.github.io/apt/Apps/CW4/index.html">Inspector 2</a> (Week 4)</li>
-            <li><a href="https://yrgp.github.io/apt/Apps/CW5/fileOperation.html">Read File</a> (Week 5)</li>
-            <li><a href="https://yrgp.github.io/apt/Apps/CW6/Timing.html">Array vs Map</a> (Week 6)</li>
-            <li><a href="https://yrgp.github.io/apt/Apps/CW7/table.html">Table</a> (Week 7)</li>
-	    <li><a href="https://yrgp.github.io/apt/Apps/CW9/svg.html">SVG</a> (Week 9)</li>
-        </ul>
-      
-	 <hr>	
-        <h3>Home Works</h3>
-        <ul>
-            <li><a href="https://yrgp.github.io/apt/HW1/addCource.html">Array</a></li>
-            <li><a href="https://yrgp.github.io/apt/HW2/Database.html">Database</a></li>
-            <li><a href="https://yrgp.github.io/apt/HW3/animation.html">Animations</a></li>
-        </ul>
-        <hr>
-	<h3>Term Project</h3>
-	<ul>
-           <li><a href="https://yrgp.github.io/apt/termProject/index.html">Memory Card Game</a></li>
-        </ul>
-	<hr>
-        <h3>Useful Links</h3>
-        <ul>
-            <li><a href="https://www.w3schools.com/">W3School</a></li>
-            <li><a href="https://developer.mozilla.org/tr/">MDN Web Docs</a></li>
-            <li><a href="https://css-tricks.com/">CSS-Tricks</a></li>
-        </ul>
-	
-        </div>
-</body>
-</html>
