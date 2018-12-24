@@ -222,6 +222,7 @@ function rating() {
             ratingvalue = " Good " + 1;
         } else if (moveCounter === 30) {
             star[0].classList.remove("gold-star");
+	    ratingvalue = " Bad " + 0;
         } else if (moveCounter <= 19) {
             ratingvalue = " Excellent " + 3;
         }
