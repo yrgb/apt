@@ -37,7 +37,7 @@ function pad(val) {
 	let lockBoard = false;
 	let firstCard, secondCard;
 	let counter=0
-	
+	let falseCounter=0
 	let t
 	function flipCard() {
 
@@ -98,7 +98,7 @@ function pad(val) {
 	
 	function unflipCards() {
 	  lockBoard = true;
-	
+	  falseCounter++
 	  setTimeout(() => {
 	    firstCard.classList.remove('flip');
 	    secondCard.classList.remove('flip');
@@ -153,6 +153,7 @@ function pad(val) {
 		
 		resetLevel()
 		alert("level: hard")
+		
 		m1.hidden=false
 		m2.hidden=false
 		m3.hidden=false
@@ -188,6 +189,8 @@ function pad(val) {
 		minutesLabel.textContent="00"
 		secondsLabel.textContent="00"
 		totalSeconds=0
+		falseCounter=0
+		counter=0
 	}
 	
 	function reset()
@@ -214,16 +217,16 @@ function pad(val) {
 function rating() {
 
     for (star of stars) {
-        if (moveCounter === 10) {
+        if (  falseCounter === 10) {
             star[2].classList.remove("gold-star");
             ratingvalue = "  Very Good " + 2;
-        } else if (moveCounter === 15) {
+        } else if (falseCounter === 15) {
             star[1].classList.remove("gold-star");
             ratingvalue = " Good " + 1;
-        } else if (moveCounter === 20) {
+        } else if (falseCounter === 20) {
             star[0].classList.remove("gold-star");
             ratingvalue = " Bad " + 0;
-        } else if (moveCounter < 15) {
+        } else if (falseCounter < 15) {
             ratingvalue = " Excellent " + 3;
         }
     }
