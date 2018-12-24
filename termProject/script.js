@@ -217,13 +217,13 @@ function rating() {
         if (moveCounter === 10) {
             star[2].classList.remove("gold-star");
             ratingvalue = "  Very Good " + 2;
-        } else if (moveCounter === 20) {
+        } else if (moveCounter === 15) {
             star[1].classList.remove("gold-star");
             ratingvalue = " Good " + 1;
-        } else if (moveCounter === 30) {
+        } else if (moveCounter === 20) {
             star[0].classList.remove("gold-star");
-	    ratingvalue = " Bad " + 0;
-        } else if (moveCounter <= 19) {
+            ratingvalue = " Bad " + 0;
+        } else if (moveCounter < 15) {
             ratingvalue = " Excellent " + 3;
         }
     }
