@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>NFA and DFA for (1|0)*00 </title>
+</head>
+
+<body>
+
+    <h2 id=title></h2>
+
+    <p>Non-deterministic finite automaton</p>
+
+    w = <input id=input type=text value=010010100 onChange="test1()"> &emsp;
+    F = <input id=final type=text value=c onChange="test1()" style="width:30px">
+	<p id =nonDet style="color: red" ></p>
+
+	
+    <p>Deterministic finite automaton</p>
+
+    w = <input id=input2 type=text value=010010100 onChange="test2()"> &emsp;
+    F = <input id=final2 type=text value=c onChange="test2()" style="width:30px">
+
+
+	<p id =det style="color: red"></p>
+
+<hr>
+
+	Input Number = <input id=re type="number"  min=1 max=50 onChange="test()" style="width:30px">
+	
+	<pre id=out></pre>
+
+
+    <hr />
+
+    <style>
+        table {
+            border-collapse: collapse;
+            margin: 0 50px;
+        }
+        th {
+            color: blue;
+            padding: 5px 12px;
+        }
+        td {
+            border: 1px solid blue;
+            padding: 5px 12px;
+            text-align: center;
+        }
+    </style>
+    
+    <table style="float:left;"> 
+	<tr><th></th><th>0</th><th>1</th></tr>
+	<tr><th> > a</th><td>ab</td><td>a</td></tr>
+	<tr><th>&emsp;b</th><td>c</td><td>ϕ</td></tr>
+	<tr><th>* c</th><td>ϕ</td><td>ϕ</td></tr>
+	</table> 
+	
+	<table>
+	<tr><th></th><th>0</th><th>1</th></tr>
+	<tr><th> >  a</th><td>ab</td><td>a</td></tr>
+	<tr><th>&emsp; ab</th><td>abc</td><td>a</td></tr>
+	<tr><th>* abc</th><td>abc</td><td>a</td></tr>
+	</table>
+
+    <pre id=sample></pre>
+
+    <hr />
+
+    <script>
+        "use strict";
+        title.innerText = document.title
+        sample.innerText = 'Non-deterministic Methods\n\n'+delta1+ '\n' + accept1 + '\n\n' +'Deterministic Methods\n\n' + delta2 + '\n' + accept2
+        
+        function union(a, b) { //set operation using strings
+            let s = a
+            for (let x of b) if (!a.includes(x)) s += x
+            return s
+        }
+        function intersect(a, b) {
+            let s = ''
+            for (let x of b) if (a.includes(x)) s += x
+            return s
+        }
+        
+        
+        function delta1(q, c) { // (1|0)*00
+            if (q == 'a' && c == '0') return 'ab'
+            if (q == 'a' && c == '1') return 'a'
+            if (q == 'b' && c == '0') return 'c'
+            return '';  //default -- no transition
+        }
+        
+        function accept1(w, F = 'c', Q = 'a') {
+            //w: input String
+            //F: final state(s)
+            //Q: current state(s)
+            let i = 0, txt = Q
+            while (i < w.length) {
+                let c = w[i], T = ''
+                for (let q of Q)
+                    T = union(T, delta1(q, c))
+                Q = T
+                if (Q == '') break
+                i++; txt += ", " + c + " -> " + Q + '\n' + Q
+            }
+            input.selectionStart = i
+            input.selectionEnd = i + 1
+            return intersect(Q, F).length > 0
+        }
+        
+        function test1() {
+            let s = accept1(input.value, final.value);
+            nonDet.innerText=s
+        }
+        
+        //Deterministic
+       function delta2(q, c) { // (1|0)*00
+             if (q=='a' && c=='0') return 'b'
+		     if ((q=='a' || q=='b' || q=='c') && c=='1') return 'a'
+		     if ((q=='b' || q=='c') && c=='0') return 'c'
+		    return '';  //default -- no transition
+        }
+        
+        function accept2(inp, F = 'c', q = 'a') {
+            //w: input String
+            //F: final state(s)
+            //q: current state
+            let i = 0, txt = q
+            while (i < inp.length) {
+                q = delta2(q, inp[i])
+                if (q == '') break
+                i++; txt += " -> " + q
+            }
+            input.selectionStart = i
+            input.selectionEnd = i + 1
+            return (q != '' && F.includes(q))
+        }
+        
+        function test2() {
+           let s = accept2(input2.value, final2.value)
+            det.innerText=s
+        }
+        
+        function test() {
+		    let e = /00$/
+		    let a = []
+		    
+		    for (let n=1; n<re.value; n++) {
+		        let w = n.toString(2)  // to binary
+		        if (accept1(w) && accept2(w)) a.push(n);
+			}
+
+    out.innerHTML = "Result Regex: [" + a + "]"
+		}
+        
+        test();
+        test1()
+        test2()
+        
+    </script>
+</body>
+
+</html>
