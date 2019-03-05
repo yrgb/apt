@@ -11,23 +11,6 @@
 
     <h2 id=title></h2>
 
-    <p>Non-deterministic finite automaton</p>
-
-    w = <input id=input type=text value=010010100 onChange="test1()"> &emsp;
-    F = <input id=final type=text value=c onChange="test1()" style="width:30px">
-	<p id =nonDet style="color: red" ></p>
-
-	
-    <p>Deterministic finite automaton</p>
-
-    w = <input id=input2 type=text value=010010100 onChange="test2()"> &emsp;
-    F = <input id=final2 type=text value=c onChange="test2()" style="width:30px">
-
-
-	<p id =det style="color: red"></p>
-
-<hr>
-
 	Input Number = <input id=re type="number"  min=1 max=50 onChange="test()" style="width:30px">
 	
 	<pre id=out></pre>
@@ -72,7 +55,8 @@
     <script>
         "use strict";
         title.innerText = document.title
-        sample.innerText = 'Non-deterministic Methods\n\n'+delta1+ '\n' + accept1 + '\n\n' +'Deterministic Methods\n\n' + delta2 + '\n' + accept2
+        
+        sample.innerText = 'Non-deterministic Methods\n\n'+delta1+ '\n' + accept1 + '\n\n' +'Deterministic Methods\n\n' + delta2 + '\n' + accept2 +   '\n'  + test
         
         function union(a, b) { //set operation using strings
             let s = a
@@ -106,15 +90,11 @@
                 if (Q == '') break
                 i++; txt += ", " + c + " -> " + Q + '\n' + Q
             }
-            input.selectionStart = i
-            input.selectionEnd = i + 1
+
             return intersect(Q, F).length > 0
         }
         
-        function test1() {
-            let s = accept1(input.value, final.value);
-            nonDet.innerText=s
-        }
+
         
         //Deterministic
        function delta2(q, c) { // (1|0)*00
@@ -134,31 +114,31 @@
                 if (q == '') break
                 i++; txt += " -> " + q
             }
-            input.selectionStart = i
-            input.selectionEnd = i + 1
+
             return (q != '' && F.includes(q))
         }
         
-        function test2() {
-           let s = accept2(input2.value, final2.value)
-            det.innerText=s
-        }
+       
         
-        function test() {
-		    let e = /00$/
-		    let a = []
-		    
-		    for (let n=1; n<re.value; n++) {
-		        let w = n.toString(2)  // to binary
-		        if (accept1(w) && accept2(w)) a.push(n);
-			}
-
-    out.innerHTML = "Result Regex: [" + a + "]"
-		}
-        
-        test();
-        test1()
-        test2()
+    function test() {
+	    let e = /00$/
+	    let s = ""
+	    let a = [], b = [], c = [];
+	    
+	    for (let n=1; n<re.value; n++) {
+	        let w = n.toString(2)  // to binary
+	        if (e.test(w)) a.push(n);
+	        if (accept1(w)) b.push(n);
+	        if (accept2(w)) c.push(n);
+	    }
+	    console.log("Result Regex: [" + a + "]")
+	    console.log("Result DFA: [" + b + "]")
+	    console.log("Result NFA: [" + c + "]")
+	    out.innerHTML = "Result Regex: [" + a + "]" + '<br>' + "Result DFA: [" + b + "]" + '<br>' + "Result NFA: [" + c + "]"
+}
+    test();
+    
+   
         
     </script>
 </body>
